@@ -19,14 +19,14 @@ TARGET_SUPPORTS_CREATOR_MODE ?= true
 TARGET_SUPPORTS_HIGH_REFRESH_RATE ?= true
 TARGET_SUPPORTS_SOUND_ENHANCEMENT ?= true
 TARGET_SUPPORTS_BATTERY_CARE ?= true
+TARGET_SUPPORTS_EUICC ?= true
 
 # Soong Namespace
 PRODUCT_SOONG_NAMESPACES += \
     $(LOCAL_PATH)/XperiaModules
 
 # Main Module
-PRODUCT_PACKAGES += \
-    XperiaSettings \
+PRODUCT_PACKAGES += XperiaSettings
 
 # Submodules
 ifeq ($(TARGET_SUPPORTS_CREATOR_MODE),true)
@@ -40,11 +40,15 @@ endif
 ifeq ($(TARGET_SUPPORTS_SOUND_ENHANCEMENT),true)
 	PRODUCT_PACKAGES += \
 	XperiaAudio \
-    XperiaDirac \
+        XperiaDirac \
 	XperiaTSRA
 endif
 
 ifeq ($(TARGET_SUPPORTS_BATTERY_CARE),true)
-include hardware/sony/sepolicy/qti/SEPolicy.mk
+include hardware/sony/XperiaModules/XperiaCharger/sepolicy/qti/SEPolicy.mk
 	PRODUCT_PACKAGES += XperiaCharger
+endif
+
+ifeq ($(TARGET_SUPPORTS_EUICC),true)
+	PRODUCT_PACKAGES += XperiaEuicc
 endif
