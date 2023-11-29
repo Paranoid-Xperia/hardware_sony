@@ -10,7 +10,7 @@
 
     <PreferenceCategory>
 
-        <!-- Preference
+        <Preference
             android:key="audio_dolby"
             android:icon="@drawable/ic_dolby"
             android:title="@string/dolby_title"
@@ -19,17 +19,6 @@
             <intent
                 android:targetPackage="com.dolby.daxappui2"
                 android:targetClass="com.dolby.daxappui2.MainActivity" />
-        </Preference -->
-
-        <Preference
-            android:key="audio_threesixtyra"
-            android:icon="@drawable/ic_threesixtyra"
-            android:title="@string/threesixtyra_setting_header"
-            android:summary="@string/threesixtyra_setting_summary"
-            android:persistent="false">
-            <intent
-                android:targetPackage="jp.co.sony.threesixtyra.settings"
-                android:targetClass="jp.co.sony.threesixtyra.settings.introduction.Introduction360raActivity" />
         </Preference>
 
         <Preference
@@ -70,3 +59,4 @@
         android:selectable="false" />
 
 </PreferenceScreen>
+
