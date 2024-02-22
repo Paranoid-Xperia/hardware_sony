@@ -17,7 +17,6 @@
 # Flags
 TARGET_SUPPORTS_CREATOR_MODE ?= true
 TARGET_SUPPORTS_SOUND_ENHANCEMENT ?= true
-TARGET_SUPPORTS_BATTERY_CARE ?= true
 TARGET_SUPPORTS_EUICC ?= true
 
 # Soong Namespace
@@ -36,11 +35,6 @@ ifeq ($(TARGET_SUPPORTS_SOUND_ENHANCEMENT),true)
 	PRODUCT_PACKAGES += \
 	XperiaAudio \
 	XperiaTSRA
-endif
-
-ifeq ($(TARGET_SUPPORTS_BATTERY_CARE),true)
-include hardware/sony/XperiaModules/XperiaCharger/sepolicy/qti/SEPolicy.mk
-	PRODUCT_PACKAGES += XperiaCharger
 endif
 
 ifeq ($(TARGET_SUPPORTS_EUICC),true)
