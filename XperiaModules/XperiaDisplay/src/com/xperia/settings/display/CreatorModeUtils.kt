@@ -8,14 +8,12 @@ package com.xperia.settings.display
 
 import android.app.Activity
 import android.content.Context
+import android.hardware.display.ColorDisplayManager
 import android.provider.Settings
 import android.util.Log
 import android.view.View
 
-import android.graphics.ColorMatrix
-import android.graphics.ColorMatrixColorFilter
 import androidx.core.content.ContextCompat
-import android.hardware.display.ColorDisplayManager
 
 import vendor.semc.hardware.display.V2_0.IDisplay
 import vendor.semc.hardware.display.V2_0.IDisplayCallback
@@ -53,20 +51,10 @@ class CreatorModeUtils(private val context: Context) : IDisplayCallback.Stub() {
     }
 
     override fun onWhiteBalanceMatrixChanged(matrix: PccMatrix) {
-        val colorMatrix: ColorMatrix = ColorMatrix().apply {
-            set(floatArrayOf(
-                    matrix.red, matrix.green, matrix.blue, 0f, 0f,
-                    matrix.red, matrix.green, matrix.blue, 0f, 0f,
-                    matrix.red, matrix.green, matrix.blue, 0f, 0f,
-                    0f, 0f, 0f, 1f, 0f
-            ))
-        }
-
-        val filter = ColorMatrixColorFilter(colorMatrix)
-
-        val views = (context as Activity).window.decorView
-        views.post { views.background.colorFilter = filter }
         Log.i(TAG, "New white balance: ${matrix.red}, ${matrix.green}, ${matrix.blue}")
+        colorDisplayManager.setColorBalanceChannel(0, (matrix.red * 255).toInt())
+        colorDisplayManager.setColorBalanceChannel(1, (matrix.green * 255).toInt())
+        colorDisplayManager.setColorBalanceChannel(2, (matrix.blue * 255).toInt())
     }
 
     companion object {

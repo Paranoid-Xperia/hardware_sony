@@ -12,6 +12,7 @@
           android:versionName="1.0"
           android:sharedUserId="android.uid.system">
 
+    <uses-permission android:name="android.permission.CONTROL_DISPLAY_COLOR_TRANSFORMS" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
     <uses-permission android:name="android.permission.WRITE_SETTINGS"/>
 
